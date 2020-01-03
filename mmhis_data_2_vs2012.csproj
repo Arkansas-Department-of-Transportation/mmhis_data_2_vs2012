@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4733FBCB-DD10-4747-92D2-DECA98B8DD43}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mmhis_data_2_vs2012</RootNamespace>
+    <AssemblyName>mmhis_data_2_vs2012</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\gmap\debug\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\..\mmhis_data_test\gmap\debug\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ADODB">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\ado\Interop.ADODB.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.ADOX">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\ado\Interop.ADOX.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\postgre\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\mysql\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\postgre\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\objectlistview_runtime\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\jared_wiley\tech_serv_data_processing_modules\references\sqlite.net\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\jared_wiley\tech_serv_data_processing_modules\current\db_utility.cs">
+      <Link>db_utility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\jared_wiley\tech_serv_data_processing_modules\current\tech_serv_data_processing_modules_new.cs">
+      <Link>tech_serv_data_processing_modules_new.cs</Link>
+    </Compile>
+    <Compile Include="choose_field_specifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="choose_field_specifier.Designer.cs">
+      <DependentUpon>choose_field_specifier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data_table_view.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data_table_view.Designer.cs">
+      <DependentUpon>data_table_view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlee_console_application.cs" />
+    <Compile Include="enter_mmhis_direction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="enter_mmhis_direction.Designer.cs">
+      <DependentUpon>enter_mmhis_direction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="enter_mmhis_year.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="enter_mmhis_year.Designer.cs">
+      <DependentUpon>enter_mmhis_year.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="helper_class.cs" />
+    <Compile Include="Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Map.Designer.cs">
+      <DependentUpon>Map.cs</DependentUpon>
+    </Compile>
+    <Compile Include="opacity_adjustment_dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="opacity_adjustment_dialog.Designer.cs">
+      <DependentUpon>opacity_adjustment_dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="select_db_source.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="select_db_source.Designer.cs">
+      <DependentUpon>select_db_source.cs</DependentUpon>
+    </Compile>
+    <Compile Include="site_data.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="site_data.Designer.cs">
+      <DependentUpon>site_data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="the_sub_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="the_sub_window.Designer.cs">
+      <DependentUpon>the_sub_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="video_frame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="video_frame.Designer.cs">
+      <DependentUpon>video_frame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win32.cs" />
+    <EmbeddedResource Include="choose_field_specifier.resx">
+      <DependentUpon>choose_field_specifier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data_table_view.resx">
+      <DependentUpon>data_table_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="enter_mmhis_direction.resx">
+      <DependentUpon>enter_mmhis_direction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="enter_mmhis_year.resx">
+      <DependentUpon>enter_mmhis_year.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Map.resx">
+      <DependentUpon>Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="opacity_adjustment_dialog.resx">
+      <DependentUpon>opacity_adjustment_dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="select_db_source.resx">
+      <DependentUpon>select_db_source.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="site_data.resx">
+      <DependentUpon>site_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="the_sub_window.resx">
+      <DependentUpon>the_sub_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="video_frame.resx">
+      <DependentUpon>video_frame.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

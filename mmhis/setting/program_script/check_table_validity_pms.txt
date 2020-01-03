@@ -1,0 +1,16 @@
+select
+	LogMile,
+	[Section],
+	IRILeftWheelPath,
+	IRIRightWheelPath,
+	RuttingLeftWheelPath,
+	RuttingRightWheelPath,
+	Grade,
+	FaultCount,
+	AverageFault,
+	MaximumFault,
+	Latitude,
+	Longitude,
+	Speed
+from [[[table_name]]]
+where [Section] = '[[section_number]]';

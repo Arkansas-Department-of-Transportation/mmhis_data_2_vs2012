@@ -1,0 +1,27 @@
+select
+	ID,
+	DateUpdated,
+	District,
+	County,
+	[Section],
+	BeginningLogMile,
+	EndingLogMile,
+	Length,
+	RuralUrbanCode,
+	FunctionalClassification,
+	NHSSystemClassification,
+	SurfaceTypeCode,
+	SurfaceWidth,
+	LaneWidth,
+	MedianWidth,
+	RightShoulderSurfaceType,
+	LeftShoulderSurfaceType,
+	RightShoulderWidth,
+	LeftShoulderWidth,
+	JobNumber,
+	YearBuilt,
+	AverageDailyTraffic,
+	YearADTCollected,
+	NumberOfLanes
+from [[[table_name]]]
+where [Section] = '[[section_number]]';

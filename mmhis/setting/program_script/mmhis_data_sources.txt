@@ -1,0 +1,51 @@
+______________________________________________________________________________________
+Accident:
+	(partial ARNOLD)
+
+		[SQL2].[ECRASH2015].[dbo].[2016CRASH TABLE WITH RI and SEVERITY]
+		[SQL2].[ECRASH2015].[dbo].[2016_Person_Table]
+______________________________________________________________________________________
+Bridge:
+	(no ARNOLD, Latitude and Longitude needed for conversion to ARNOLD)
+	for bridges with common structure number except the first character, choose the one cloest to the road
+
+		[SQLINSPECTTECH].[inspectTech].[dbo].[AHTDbrglong]
+		 -or-
+		[SQLINSPECTTECH].[inspectTech].[dbo].[AHTD_GISBridge] (for meaning of fields, see mtguide_for_bridge_field_meanings.pdf)
+		gisuser / gis
+
+		OR / AND
+
+		[SQL1].[gisuser].[dbo].[pbrglong]
+		gisuser / gis
+______________________________________________________________________________________
+Job:
+	(ARNOLD)
+
+		[SQL2].[Program_Management].[dbo].[Job_Status_Mapping]
+
+		OR / AND
+
+		[SQLGIS].[ProgramManagement].[JS_Lines]
+
+		OR / AND
+
+		[SQL2].[Program_management].[dbo].[Job_Status_Mapping]
+
+	(no ARNOLD)
+
+		Database:	\\csd1\public\P & C\d<number>_jobrec.mdb
+		Table:		JOBS_D<number>
+______________________________________________________________________________________
+PMS, Frame Index:
+	(ARNOLD)
+
+		[SQL2].[AssetManagement].[PavementData].[ARANDataMethod5_2018_Aligned]
+______________________________________________________________________________________
+Roadway inventory:
+	(ARNOLD)
+
+		[SQLDW].[SIR].[dbo].[ROADINVENTORYTABLE]
+
+	(no ARNOLD)
+		[SQL1].[ROADINV].[dbo].[OUT_Mileage]

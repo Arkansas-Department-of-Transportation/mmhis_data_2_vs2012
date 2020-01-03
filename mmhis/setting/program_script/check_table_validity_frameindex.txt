@@ -1,0 +1,9 @@
+select
+	LogMile,
+	[Section],
+	VideoFileName,
+	StartFrameNumber,
+	EndFrameNumber,
+	TurningMovementFlag
+from [[[table_name]]]
+where [Section] = '[[section_number]]';

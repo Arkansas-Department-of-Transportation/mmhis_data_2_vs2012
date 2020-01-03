@@ -1,0 +1,13 @@
+// full data query
+SELECT field_category || '_' || field_name field_specifier, field_value FROM mmhis_fen WHERE lu='[[level_1_to_2_uuid]]'
+UNION ALL
+SELECT a.field_category || '_' || a.field_name field_specifier, a.field_value
+FROM mmhis_fen a INNER JOIN mmhis_duan b
+ON a.lu = b.ld
+WHERE
+ b.lu = '[[level_0_to_1_uuid]]' AND
+ (
+  (MIN(b.logmeter_0, b.logmeter_1) <= [[logmeter]] + 5 AND MAX(b.logmeter_0, b.logmeter_1) >= [[logmeter]] - 5)
+  OR
+  (b.logmeter_1 IS NULL AND (b.logmeter_0 - 5 < [[logmeter]]) and (b.logmeter_0 + 5 > [[logmeter]]))
+ )

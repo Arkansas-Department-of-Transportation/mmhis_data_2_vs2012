@@ -1,0 +1,11 @@
+mmhis authoring program
+
+all user interface element values are saved to a configuration file in sqlite format, which is specified from the program and can be changed. this includes map provider information.
+
+map provider has two, one is for line viewing, the other is for bridge locating.
+
+bridge locating:
+
+since the current bridge database does not contain enough information about location / direction of travel, the user is offered a way to locate the bridges on the map. all found bridges are included in a listbox. selecting an item from the listbox causes the program to display the ARAN's images captured by the cameras in their corresponding image windows. for the current selected bridge, a marker is shown on both map windows. the user uses the mouse to click the point the bridge is supposed to start, effectively changing the bridge location for mmhis only. the new location's corresponding images will be shown, letting the user to see what mmhis users will see when the database is submitted to the production server. if a certain bridge should not be in the database, the user marks its checkbox in the bridge list. the result is then saved back to the database.
+
+query existing mmhis db should be the same as what is outlined in the mmhis_program_design.txt file

@@ -1,0 +1,25 @@
+CREATE TABLE "mmhis_dian" (
+	"lu"	TEXT NOT NULL,
+	"logmeter_0"	REAL NOT NULL,
+	"latitude"	REAL,
+	"longitude"	REAL,
+	"ld"	TEXT NOT NULL
+);
+
+CREATE INDEX "index_dian_0" ON "mmhis_dian" (
+	"lu",
+	"logmeter_0",
+	"latitude",
+	"longitude"
+);
+
+CREATE INDEX "index_dian_1" ON "mmhis_dian" (
+	"latitude",
+	"longitude"
+);
+
+CREATE INDEX "index_dian_2" ON "mmhis_dian" (
+    "lu",
+	"latitude",
+	"longitude"
+);

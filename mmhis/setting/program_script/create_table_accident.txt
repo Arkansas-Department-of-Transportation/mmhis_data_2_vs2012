@@ -1,0 +1,26 @@
+create table [[[table_name]]] (
+	DateUpdated	varchar	(10),
+	CrashNumber	float,
+	LogMile	float,
+	[Section]	varchar	(3),
+	NumberOfFatalities	smallint,
+	NumberOfInjuries	smallint,
+	CrashInConstructionZone	Integer,
+	IntersectionType	Integer,
+	NHSCode	varchar	(3),
+	RoadSystem	smallint,
+	Latitude	float,
+	Longitude	float
+);
+
+create index [LogMile] on [[[table_name]]] (LogMile);
+
+create index [NHSCode] on [[[table_name]]] (NHSCode);
+
+create index [NumberOfFatalities] on [[[table_name]]] (NumberOfFatalities);
+
+create index [NumberOfInjuries] on [[[table_name]]] (NumberOfInjuries);
+
+create index [PrimaryKey] on [[[table_name]]] ([CrashNumber]) with primary;
+
+create index [Section] on [[[table_name]]] ([Section]);

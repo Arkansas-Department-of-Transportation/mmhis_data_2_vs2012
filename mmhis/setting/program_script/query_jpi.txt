@@ -1,0 +1,9 @@
+SELECT [ROWImagePath]
+      ,[PavementImagePath]
+      ,[FrontLeftImagePath]
+      ,[FrontRightImagePath]
+      ,[RearLeftImagePath]
+      ,[RearRightImagePath]
+  FROM [[table_spec]]
+  WHERE [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+  ORDER BY Logmile

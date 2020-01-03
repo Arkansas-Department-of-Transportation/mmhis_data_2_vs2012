@@ -1,0 +1,19 @@
+create table [[[table_name]]] (
+	DateUpdated	varchar(10),
+	BeginningLogMile	float,
+	[Section]	varchar(3),
+	JobNumber	varchar(10),
+	ProjectLength	float,
+	MinuteOrderNumber	varchar(10),
+	MinuteOrderDate	varchar(10),
+	LetDate	varchar(10),
+	CompletionDate	varchar(10),
+	TotalCost	varchar(15),
+	Location	varchar(50),
+	TypeWork	varchar(30),
+	HIPTypeWork	varchar(30),
+	IncludedInHIP91	varchar(1)
+);
+
+//create index [PrimaryKey] on [[[table_name]]] ([Section], [BeginningLogMile]) with primary;
+create index [section_logmile] on [[[table_name]]] ([Section], [BeginningLogMile]);

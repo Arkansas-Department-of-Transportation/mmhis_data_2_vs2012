@@ -1,0 +1,20 @@
+// ARNOLD and non-ARNOLD mixed
+
+SELECT 
+       CONVERT(VARCHAR(10), GETDATE(), 101) [DateUpdated]
+      ,MAX(a.[StateCaseNumber]) [CrashNumber]
+      ,MAX([AH_Logmile]) [LogMile]
+      ,MAX([StreetSection]) [Section]
+      ,SUM(IIF(b.InjuryStatus IN (1), 1, 0)) [NumberOfFatalities]
+      ,SUM(IIF(b.InjuryStatus IN (2, 3, 4), 1, 0)) [NumberOfInjuries]
+      ,MAX((CASE WHEN [LocationRelativeToWorkZone] IN (2, 3, 4, 5) THEN -1 ELSE 0 END)) [CrashInConstructionZone]
+      ,MAX([IntersectionType]) [IntersectionType]
+      ,MAX([NHS]) [NHSCode]
+      ,MAX([RoadSystem]) [RoadSystem]
+      ,MAX([Latitude]) [Latitude]
+      ,MAX([Longitude]) [Longitude]
+  FROM [[[database]]].[[[schema]]].[[[crash_table]]] a
+  LEFT JOIN [[[database]]].[[[schema]]].[[[person_table]]] b ON a.[StateCaseNumber]=b.[StateCaseNumber]
+  WHERE a.[AH_RoadID]='[[road_id]]'
+  GROUP BY a.[StateCaseNumber]
+  ORDER BY 2

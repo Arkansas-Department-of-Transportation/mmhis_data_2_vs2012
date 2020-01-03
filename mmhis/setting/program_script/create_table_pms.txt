@@ -1,0 +1,21 @@
+create table [[[table_name]]] (
+	LogMile	float,
+	[Section]	varchar(3),
+	IRILeftWheelPath	real,
+	IRIRightWheelPath	real,
+	RuttingLeftWheelPath	real,
+	RuttingRightWheelPath	real,
+	Grade	real,
+	FaultCount	smallint,
+	AverageFault	real,
+	MaximumFault	smallint,
+	Latitude	float,
+	Longitude	float,
+	Speed	real
+);
+
+create index [LogMile] on [[[table_name]]] ([LogMile]);
+
+create index [MMHISIndex] on [[[table_name]]] ([Section], [LogMile]);
+
+create index [PrimaryKey] on [[[table_name]]] ([Section], [LogMile]) with primary;

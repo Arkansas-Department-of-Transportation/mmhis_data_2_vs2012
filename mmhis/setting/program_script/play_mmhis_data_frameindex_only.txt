@@ -1,0 +1,4 @@
+// frame index query only
+SELECT field_category || '_' || field_name field_specifier, field_value
+FROM mmhis_fen
+WHERE lu='[[level_1_to_2_uuid]]' AND ([[frameindex_field_specifiers]])

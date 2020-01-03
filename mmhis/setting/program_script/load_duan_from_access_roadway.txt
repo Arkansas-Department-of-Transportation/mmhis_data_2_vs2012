@@ -1,0 +1,8 @@
+SELECT
+	 a.BeginningLogMile * 1609.344 AS no_category_logmeter_0
+	,a.EndingLogMile * 1609.344 AS no_category_logmeter_1
+	,a.*
+FROM
+	[[[table_name_1]]] AS a
+WHERE [Section] = '[[short_section]]'
+ORDER BY a.BeginningLogMile, a.EndingLogMile

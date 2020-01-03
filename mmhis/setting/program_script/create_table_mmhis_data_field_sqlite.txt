@@ -1,0 +1,49 @@
+CREATE TABLE "mmhis_data_field" (
+	"uuid"	TEXT NOT NULL,
+	"user_id"	TEXT,
+	"format_group_id"	TEXT,
+	"field_specifier"	TEXT,
+	"window_specifier"	TEXT,
+	"caption_text"	TEXT,
+	"caption_position_x"	INTEGER,
+	"caption_position_y"	INTEGER,
+	"caption_font_name"	TEXT,
+	"caption_font_size"	REAL,
+	"caption_font_bold"	INTEGER,
+	"caption_font_italic"	INTEGER,
+	"caption_font_underline"	INTEGER,
+	"caption_color"	TEXT,
+	"value_text"	TEXT,
+	"value_conversion_factor"	REAL,
+	"value_format"	TEXT,
+	"value_position_x"	INTEGER,
+	"value_position_y"	INTEGER,
+	"value_font_name"	TEXT,
+	"value_font_size"	REAL,
+	"value_font_bold"	INTEGER,
+	"value_font_italic"	INTEGER,
+	"value_font_underline"	INTEGER,
+	"value_color"	TEXT,
+	"unit_text"	TEXT,
+	"unit_position_x"	INTEGER,
+	"unit_position_y"	INTEGER,
+	"unit_font_name"	TEXT,
+	"unit_font_size"	REAL,
+	"unit_font_bold"	INTEGER,
+	"unit_font_italic"	INTEGER,
+	"unit_font_underline"	INTEGER,
+	"unit_color"	TEXT,
+	"display_order"	INTEGER,
+	PRIMARY KEY("uuid")
+);
+
+CREATE INDEX "index_format_0" ON "mmhis_data_field" (
+	"user_id",
+	"format_group_id",
+	"field_specifier",
+	"window_specifier"
+);
+
+CREATE INDEX "index_format_1" ON "mmhis_data_field" (
+	"uuid"
+);

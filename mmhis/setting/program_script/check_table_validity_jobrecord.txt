@@ -1,0 +1,17 @@
+select
+	[DateUpdated],
+	[BeginningLogMile],
+	[Section],
+	[JobNumber],
+	[ProjectLength],
+	[MinuteOrderNumber],
+	[MinuteOrderDate],
+	[LetDate],
+	[CompletionDate],
+	[TotalCost],
+	[Location],
+	[TypeWork],
+	[HIPTypeWork],
+	[IncludedInHIP91]
+from [[[table_name]]]
+where [Section] = '[[section_number]]';

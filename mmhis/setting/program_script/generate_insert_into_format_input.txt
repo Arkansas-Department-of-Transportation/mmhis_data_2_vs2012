@@ -1,0 +1,90 @@
+insert into [test_format] ([FieldName], [Caption], [Type], [Unitless], [MetricsUnitName], [MetricsConverter], [ImperialUnitName], [ImperialConverter], [Format], [GroupName], [DefaultDisplayOrder], [SourceTable]) values (
+Latitude, Latitude, f, -1, , 0, , 0, %f, GPS, 1, pms
+Longitude, Longitude, f, -1, , 0, , 0, %f, GPS, 2, pms
+DateUpdated, Roadway Data Date, t, -1, , 0, , 0, %s, Roadway, 3, roadway
+District, District, t, -1, , 0, , 0, %s, Roadway, 4, roadway
+County, County, t, -1, , 0, , 0, %s, Roadway, 5, roadway
+__SpecialRoadway1, Log Mile, f, 0, km, 0.001, mile, 6.2137E-04, %8.3f, Roadway, 6, roadway
+Section, Section, t, -1, , 0, , 0, %s, Roadway, 7, roadway
+BeginningLogMile, Beginning Log Mile, f, 0, km, 1.609, mile, 1, %8.3f, Roadway, 8, roadway
+EndingLogMile, Ending Log Mile, f, 0, km, 1.609, mile, 1, %8.3f, Roadway, 9, roadway
+Length, Length, f, 0, km, 1.609, mile, 1, %8.3f, Roadway, 10, roadway
+NumberOfLanes, Number of Lanes, i, -1, , 0, , 0, %d, Roadway, 11, roadway
+RuralUrbanCode, Rural/Urban, t, -1, , 0, , 0, %s, Roadway, 12, roadway
+FunctionalClassification, Functional Classification, t, -1, , 0, , 0, %s, Roadway, 13, roadway
+NHSSystemClassification, NHS System Classification, t, -1, , 0, , 0, %s, Roadway, 14, roadway
+SurfaceTypeCode, Surface Type, t, -1, , 0, , 0, %s, Roadway, 15, roadway
+SurfaceWidth, Surface Width, f, 0, m, 0.304878, ft, 1, %3.0f, Roadway, 16, roadway
+LaneWidth, Lane Width, f, 0, m, 0.304878, ft, 1, %3.0f, Roadway, 17, roadway
+MedianWidth, Median Width, f, 0, m, 0.304878, ft, 1, %3.0f, Roadway, 18, roadway
+RightShoulderSurfaceType, Right Shoulder Surface Type, t, -1, , 0, , 0, %s, Roadway, 19, roadway
+RightShoulderWidth, Right Shoulder Width, f, 0, m, 0.304878, ft, 1, %3.0f, Roadway, 20, roadway
+LeftShoulderSurfaceType, Left Shoulder Surface Type, t, -1, , 0, , 0, %s, Roadway, 21, roadway
+LeftShoulderWidth, Left Shoulder Width, f, 0, m, 0.304878, ft, 1, %3.0f, Roadway, 22, roadway
+JobNumber, Job Number, t, -1, , 0, , 0, %s, Roadway, 23, roadway
+YearBuilt, Year Built, t, -1, , 0, , 0, %s, Roadway, 24, roadway
+AverageDailyTraffic, Average Daily Traffic, i, -1, , 0, , 0, %d, Roadway, 25, roadway
+DateUpdated, PMS Data Date, t, -1, , 0, , 0, %s, Pavement Management, 26, pms
+IRILeftWheelPath, IRI - Left Wheel Path, f, 0, m/km, 1, in/mi, 63.36, %5.2f, Pavement Management, 27, pms
+IRIRightWheelPath, IRI - Right Wheel Path, f, 0, m/km, 1, in/mi, 63.36, %5.2f, Pavement Management, 28, pms
+RuttingLeftWheelPath, Rutting -Left Wheel Path, f, 0, mm, 1, inches, 0.03937, %6.3f, Pavement Management, 29, pms
+RuttingRightWheelPath, Rutting - Right Wheel Path, f, 0, mm, 1, inches, 0.03937, %6.3f, Pavement Management, 30, pms
+Grade, Grade, f, -1, , 0, , 0, %5.2f, Pavement Management, 31, pms
+FaultCount, Fault Count, i, -1, , 0, , 0, %d, Pavement Management, 32, pms
+AverageFault, Average Fault, f, -1, , 0, , 0, %5.2f, Pavement Management, 33, pms
+MaximumFault, Maximum Fault, i, -1, , 0, , 0, %d, Pavement Management, 34, pms
+DateUpdated, Bridge Data Date, t, -1, , 0, , 0, %s, Bridge, 35, bridge
+StructureNumber, Structure Number, t, -1, , 0, , 0, %s, Bridge, 36, bridge
+FacilityOnStructure, Facility On Structure, t, -1, , 0, , 0, %s, Bridge, 37, bridge
+HighestMinimumVerticalClearance, HighestMinimumVerticalClearance, t, -1, , 0, , 0, %s, Bridge, 38, bridge
+YearBuilt, Year Built, t, -1, , 0, , 0, %s, Bridge, 39, bridge
+MainSpanType, Main Span Type, t, -1, , 0, , 0, %s, Bridge, 40, bridge
+ApproachSpanType, Approach Span Type, t, -1, , 0, , 0, %s, Bridge, 41, bridge
+NumberOfApproachSpans, Number of Approach Spans, t, -1, , 0, , 0, %s, Bridge, 42, bridge
+MaximumSpanLength, Maximum Span Length, t, -1, , 0, , 0, %s, Bridge, 43, bridge
+StructureLength, Structure Length, t, -1, , 0, , 0, %s, Bridge, 44, bridge
+CurbToCurbWidth, Curb-to-Curb Width, t, -1, , 0, , 0, %s, Bridge, 45, bridge
+OutToOutDeckWidth, Out-to-Out Deck Width, t, -1, , 0, , 0, %s, Bridge, 46, bridge
+DeckCondition, DeckCondition, t, -1, , 0, , 0, %s, Bridge, 47, bridge
+SubstructureCondition, Substructure Condition, t, -1, , 0, , 0, %s, Bridge, 48, bridge
+OperatingRating, Operating Rating (Tons), t, -1, , 0, , 0, %s, Bridge, 49, bridge
+BridgePosting, Bridge Posting, t, -1, , 0, , 0, %s, Bridge, 50, bridge
+RoutineInspectionDate, Routine Inspection Date, t, -1, , 0, , 0, %s, Bridge, 51, bridge
+DesignatedInspectionFrequency, Designated Inspection Frequency, t, -1, , 0, , 0, %s, Bridge, 52, bridge
+YearReconstructed, Year Reconstructed, t, -1, , 0, , 0, %s, Bridge, 53, bridge
+DeckType, Deck Type, t, -1, , 0, , 0, %s, Bridge, 54, bridge
+SurfaceType, Surface Type, t, -1, , 0, , 0, %s, Bridge, 55, bridge
+SufficiencyRating, Sufficiency Rating, t, -1, , 0, , 0, %s, Bridge, 56, bridge
+ReplacementFundingCode, Replacement Funding Code, t, -1, , 0, , 0, %s, Bridge, 57, bridge
+DateUpdated, Job Status Data Date, t, -1, , 0, , 0, %s, Job Status, 58, jobrecord
+JobNumber, Job Number, t, -1, , 0, , 0, %s, Job Status, 59, jobrecord
+ProjectLength, Project Length, f, 0, km, 1.609, mile, 1, %5.2f, Job Status, 60, jobrecord
+MinuteOrderNumber, Minute Order Number, t, -1, , 0, , 0, %s, Job Status, 61, jobrecord
+MinuteOrderDate, Minute Order Date, t, -1, , 0, , 0, %s, Job Status, 62, jobrecord
+LetDate, Let Date, t, -1, , 0, , 0, %s, Job Status, 63, jobrecord
+CompletionDate, Completion Date, t, -1, , 0, , 0, %s, Job Status, 64, jobrecord
+TotalCost, Total Cost, t, -1, , 0, , 0, %s, Job Status, 65, jobrecord
+Location, Location, t, -1, , 0, , 0, %s, Job Status, 66, jobrecord
+TypeWork, Type Work, t, -1, , 0, , 0, %s, Job Status, 67, jobrecord
+HIPTypeWork, HIP Type Work, t, -1, , 0, , 0, %s, Job Status, 68, jobrecord
+IncludedInHIP91, Included In HIP 91, t, -1, , 0, , 0, %s, Job Status, 69, jobrecord
+DateUpdated, Year, t, -1, , 0, , 0, %s, Accident, 70, accident
+__SpecialAccident1, Number of Accidents This Section, i, -1, , 0, , 0, %d, Accident, 71, accident
+__SpecialAccident2, Number of Fatalities This Section, i, -1, , 0, , 0, %d, Accident, 72, accident
+__SpecialAccident3, Number of Injuries This Section, i, -1, , 0, , 0, %d, Accident, 73, accident
+__SpecialAccident4, Number in Construction Zone, i, -1, , 0, , 0, %d, Accident, 74, accident
+DateUpdated, Layers Data Date, t, -1, , 0, , 0, %s, Layers, 75, layers
+Layer1Thickness, Layer 1 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 76, layers
+Layer2Thickness, Layer 2 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 77, layers
+Layer3Thickness, Layer 3 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 78, layers
+Layer4Thickness, Layer 4 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 79, layers
+Layer5Thickness, Layer 5 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 80, layers
+Layer6Thickness, Layer 6 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 81, layers
+Layer7Thickness, Layer 7 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 82, layers
+Layer8Thickness, Layer 8 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 83, layers
+Layer9Thickness, Layer 9 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 84, layers
+Layer10Thickness, Layer 10 Thickness, f, -1, , 0, , 0, %5.2f, Layers, 85, layers
+PavementStiffness, Pavement Stiffness, f, -1, , 0, , 0, %5.2f, Layers, 86, layers
+BaseStiffness, Base Stiffness, f, -1, , 0, , 0, %5.2f, Layers, 87, layers
+SubgradeStiffness, Subgrade Stiffness, f, -1, , 0, , 0, %5.2f, Layers, 88, layers
+SubgradeRValue, Subgrade RValue, f, -1, , 0, , 0, %5.2f, Layers, 89, layers

@@ -1,0 +1,33 @@
+// ARNOLD
+
+SELECT ROUND([Logmeter],4) [Logmile]
+      ,[Section]
+      ,[IRILeftWheelPath]
+      ,[IRIRightWheelPath]
+      ,[RuttingLeftWheelPath]
+      ,[RuttingRightWheelPath]
+      ,[Grade]
+      ,[FaultCount]
+      ,[AverageFault]
+      ,[MaximumFault]
+      ,[Latitude]
+      ,[Longitude]
+      ,[Speed]
+FROM (
+SELECT [Logmile] * 1609.344 [Logmeter]
+      ,'[[the_section]]' [Section]
+      ,[IRI_L] [IRILeftWheelPath]
+      ,[IRI_R] [IRIRightWheelPath]
+      ,[ProcessedRutWire_L] * 1000 [RuttingLeftWheelPath]
+      ,[ProcessedRutWire_R] * 1000 [RuttingRightWheelPath]
+      ,[Grade]
+      ,[FaultingBWPCount] [FaultCount]
+      ,[FaultingBWPAverage] [AverageFault]
+      ,[FaultingBWPMax] [MaximumFault]
+      ,[Latitude]
+      ,[Longitude]
+      ,[Speed]
+  FROM [[table_spec]]
+  WHERE [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+) A
+ORDER BY Logmile

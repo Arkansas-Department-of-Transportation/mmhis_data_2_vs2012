@@ -1,0 +1,15 @@
+SELECT
+	a.LogMile * 1609.344 AS no_category_logmeter_0
+	,a.* // because we want to include latitude and longitude when available
+	//,a.DateUpdated AS field_category_0_DateUpdated 
+	//,a.CrashNumber AS field_category_0_CrashNumber 
+	//,a.LogMile AS field_category_0_LogMile // already in miles
+	//,a.NumberOfFatalities AS field_category_0_NumberOfFatalities 
+	//,a.NumberOfInjuries AS field_category_0_NumberOfInjuries 
+	//,a.CrashInConstructionZone AS field_category_0_CrashInConstructionZone 
+	//,a.IntersectionType AS field_category_0_IntersectionType 
+	//,a.NHSCode AS field_category_0_NHSCode 
+	//,a.RoadSystem AS field_category_0_RoadSystem 
+FROM [[[table_name_1]]] as a // accident table
+WHERE [Section] = '[[three_character_section]]' OR [Section] = '[[short_section]]'
+ORDER BY a.LogMile

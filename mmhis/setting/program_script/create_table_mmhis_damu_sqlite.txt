@@ -1,0 +1,24 @@
+CREATE TABLE "mmhis_damu" (
+	"county"	TEXT NOT NULL,
+	"route"	TEXT NOT NULL,
+	"section"	TEXT NOT NULL,
+	"mmhis_direction"	TEXT,
+	"arnold_direction"	TEXT NOT NULL,
+	"the_year"	TEXT NOT NULL,
+	"the_system"	TEXT NOT NULL,
+	"common_path_for_image"	TEXT,
+	"frame_loading_order"	INTEGER,
+	"note"	TEXT,
+	"ld"	TEXT NOT NULL,
+	"time_stamp"	TEXT,
+	"computer_host_name"	TEXT,
+	"user_id"	TEXT
+);
+
+CREATE INDEX "index_damu_0" ON "mmhis_damu" (
+	"county",
+	"route",
+	"section",
+	"mmhis_direction",
+	"the_year"
+);

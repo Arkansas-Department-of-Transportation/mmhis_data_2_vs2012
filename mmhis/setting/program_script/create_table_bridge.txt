@@ -1,0 +1,44 @@
+create table [[[table_name]]] (
+	ID	AUTOINCREMENT,
+	LogMile	float,
+	BeginningLogMile	float,
+	EndingLogMile	float,
+	[Section]	varchar(3),
+	DateUpdated	varchar(10),
+	StructureNumber	varchar(6),
+	FacilityOnStructure	varchar(25),
+	HighestMinimumVerticalClearanceFeet	varchar(2),
+	HighestMinimumVerticalClearanceInches	varchar(2),
+	YearBuilt	varchar(5),
+	MainSpanType	varchar(3),
+	ApproachSpanType	varchar(3),
+	NumberOfApproachSpans	varchar(4),
+	MaximumSpanLength	varchar(4),
+	StructureLength	varchar(6),
+	CurbToCurbWidth	varchar(4),
+	OutToOutDeckWidth	varchar(4),
+	DeckCondition	varchar(1),
+	SubstructureCondition	varchar(1),
+	OperatingRating	varchar(3),
+	BridgePosting	varchar(50),
+	RoutineInspectionDate	varchar(10),
+	DesignatedInspectionFrequency	varchar(2),
+	YearReconstructed	varchar(5),
+	DeckType	varchar(1),
+	SurfaceType	varchar(3),
+	SufficiencyRating	varchar(5),
+	ReplacementFundingCode	varchar(2),
+	NonArnoldLogMile	float,
+    Latitude    float,
+    Longitude   float
+);
+
+create index [MMHISIndex] on [[[table_name]]] ([Section], [BeginningLogMile], [EndingLogMile]);
+
+create index [NumberOfApproachSpans] on [[[table_name]]] ([NumberOfApproachSpans]);
+
+create index [SectionBLEL] on [[[table_name]]] ([Section], [BeginningLogMile], [EndingLogMile]);
+
+create index [ReplacementFundingCode] on [[[table_name]]] ([ReplacementFundingCode]);
+
+create index [PrimaryKey] on [[[table_name]]] ([ID]) with primary;

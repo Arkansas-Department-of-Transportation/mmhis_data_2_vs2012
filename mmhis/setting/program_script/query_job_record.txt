@@ -1,0 +1,46 @@
+// non-ARNOLD
+
+//SELECT
+//    Date() AS [DateUpdated]
+////    ,county
+////    ,route
+//    ,beglm AS BeginningLogMile
+//    ,sectn AS [Section]
+//    ,jobno AS JobNumber
+//    ,length AS ProjectLength
+//    ,minor AS MinuteOrderNumber
+//    ,iif(len(trim(datm))=6, right(trim(datm),2) + '/' + left(trim(datm),4),trim(datm)) AS MinuteOrderDate
+//    ,iif(len(trim(datl))=6, right(trim(datl),2) + '/' + left(trim(datl),4),trim(datl)) AS LetDate
+//    ,iif(len(trim(datc))=6, right(trim(datc),2) + '/' + left(trim(datc),4),trim(datc)) AS CompletionDate
+//    ,totfun AS TotalCost
+//    ,iif(locat=0, 'Others', iif(locat=1, 'New Location', iif(locat=2, 'Existing Location', iif(locat=3, 'Relocation', iif(locat=4, 'Sel. Sec. & Var. Bridges', 'Unknown'))))) AS Location
+//    ,b.TypWrk_Short AS TypeWork
+//    ,'' AS HIPTypeWork
+//    ,'' AS IncludedInHIP91
+//FROM [[table_name_jobs]] as a left join [[table_name_type_work]] as b on a.typwrk=b.TYPWRK
+////FROM JOBS_D11 as a left join Type_Work as b on a.typwrk=b.TYPWRK
+//WHERE route='001' and sectn='010'
+//ORDER BY beglm, jobno
+
+// ARNOLD
+
+SELECT
+    CONVERT(VARCHAR(10), GETDATE(), 101) DateUpdated
+//    ,County_No County
+//    ,Route_No Route
+    ,AH_Begin_Logmile BeginningLogMile
+    ,Section_No [Section]
+    ,Job_No JobNumber
+    ,AH_End_Logmile - AH_Begin_Logmile ProjectLength
+    ,'NA' MinuteOrderNumber
+    ,'NA' MinuteOrderDate
+    ,CONVERT(VARCHAR(10), PCPM_Let_Date, 101) LetDate
+    ,CONVERT(VARCHAR(10), PCPM_End_Date, 101) CompletionDate
+    ,null TotalCost
+    ,CASE WHEN New_Location = 0 THEN 'Existing Location' ELSE 'New Location' END Location
+    ,PCPM_Type_Work_Desc TypeWork
+    ,'' HIPTypeWork
+    ,'' IncludedInHIP91
+FROM [[[database]]].[[[schema]]].[[[table_name]]]
+WHERE AH_Road_Id = '[[road_id]]'
+ORDER BY AH_Begin_Logmile, Job_No

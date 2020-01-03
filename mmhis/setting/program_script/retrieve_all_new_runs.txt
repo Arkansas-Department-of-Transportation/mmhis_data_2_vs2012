@@ -1,0 +1,10 @@
+  SELECT [RoadID] 
+      ,[UniqueRun]
+      ,[[extract_date]] CollectionDate
+      ,MIN(Logmile) beginning_logmile
+      ,MAX(Logmile) ending_logmile
+  FROM [[table_spec]]
+  WHERE [RoadID] IS NOT NULL AND [CollectionTime] IS NOT NULL AND ([[more_condition]]) AND ([[roadid_condition]]) AND ([[unique_run_condition]])
+  GROUP BY [RoadID], [UniqueRun]
+  [[year_condition]]
+  

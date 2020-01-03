@@ -1,0 +1,15 @@
+select
+	FieldName,
+	Caption,
+	Type,
+	Unitless,
+	MetricsUnitName,
+	MetricsConverter,
+	ImperialUnitName,
+	ImperialConverter,
+	Format,
+	GroupName,
+	DefaultDisplayOrder,
+	SourceTable
+from [[[table_name]]]
+where 1=0;

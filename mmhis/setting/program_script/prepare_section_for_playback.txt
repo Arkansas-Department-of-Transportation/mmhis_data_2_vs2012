@@ -1,0 +1,4 @@
+SELECT logmeter_0, latitude, longitude, ld
+FROM [[[mmhis_dian_table]]]
+WHERE lu = '[[the_up_uuid]]'
+ORDER BY logmeter_0 [[frame_loading_order]]

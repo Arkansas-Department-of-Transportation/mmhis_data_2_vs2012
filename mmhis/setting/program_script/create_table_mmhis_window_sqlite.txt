@@ -1,0 +1,44 @@
+CREATE TABLE "mmhis_window" (
+	"uuid"	TEXT NOT NULL,
+	"user_id"	TEXT,
+	"window_group_id"	TEXT,
+	"window_specifier"	TEXT,
+	"window_visibility"	INTEGER,
+	"caption_text"	TEXT,
+	"window_type"	TEXT,
+	"control_box"	INTEGER,
+	"maximize_box"	INTEGER,
+	"minimize_box"	INTEGER,
+	"opacity"	INTEGER,
+	"top_most"	NUMERIC,
+	"show_icon"	INTEGER,
+	"show_in_taskbar"	INTEGER,
+	"border_style"	TEXT,
+	"left"	INTEGER,
+	"top"	INTEGER,
+	"width"	INTEGER,
+	"height"	INTEGER,
+	"background_color"	TEXT,
+	"map_provider"	TEXT,
+	"map_line_color_0"	TEXT,
+	"map_line_width_0"	INTEGER,
+	"map_line_color_1"	TEXT,
+	"map_line_width_1"	INTEGER,
+	"map_initial_center_latitude"	REAL,
+	"map_initial_center_longitude"	REAL,
+	"map_initial_zoom_level"	REAL,
+	"map_zoom_minimum"	INTEGER,
+	"map_zoom_maximum"	INTEGER,
+	"map_center_current_location"	INTEGER
+);
+
+CREATE INDEX "index_window_0" ON "mmhis_window" (
+	"user_id",
+	"window_group_id",
+	"window_specifier",
+	"window_type"
+);
+
+CREATE INDEX "index_window_1" ON "mmhis_window" (
+	"uuid"
+);

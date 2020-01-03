@@ -1,0 +1,20 @@
+// ARNOLD
+
+
+SELECT [Logmeter] [Logmile]
+      ,[Section]
+      ,[VideoFileName]
+      ,[StartFrameNumber]
+      ,[EndFrameNumber]
+      ,[TurningMovementFlag]
+FROM (
+SELECT [Logmile] * 1609.344 [Logmeter]
+      ,'[[the_section]]' [Section]
+      ,'[[the_video_filename]]' [VideoFileName]
+      ,ROW_NUMBER() OVER(ORDER BY Logmile ASC) [StartFrameNumber]
+      ,ROW_NUMBER() OVER(ORDER BY Logmile ASC) + 1 [EndFrameNumber]
+      ,0 [TurningMovementFlag]
+  FROM [[table_spec]]
+  WHERE [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+) A
+ORDER BY Logmile

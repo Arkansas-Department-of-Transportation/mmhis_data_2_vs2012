@@ -1,0 +1,30 @@
+SELECT
+	 a.LogMile AS no_category_logmeter_0
+	,a.Latitude AS no_category_latitude
+	,a.Longitude AS no_category_longitude
+	,a.LogMile / 1609.344 AS field_category_0_LogMile
+	,a.IRILeftWheelPath AS field_category_0_IRILeftWheelPath
+	,a.IRIRightWheelPath AS field_category_0_IRIRightWheelPath
+	,a.RuttingLeftWheelPath AS field_category_0_RuttingLeftWheelPath
+	,a.RuttingRightWheelPath AS field_category_0_RuttingRightWheelPath
+	,a.Grade AS field_category_0_Grade
+	,a.FaultCount AS field_category_0_FaultCount
+	,a.AverageFault AS field_category_0_AverageFault
+	,a.MaximumFault AS field_category_0_MaximumFault
+	,STR(a.Latitude) + "," + STR(a.Longitude) AS field_category_0_gps
+	,a.Speed AS field_category_0_Speed
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_fl
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_f
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_fr
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_rl
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_rr
+	,trim(str(b.StartFrameNumber)) + " frame_to " + trim(str(b.EndFrameNumber)) AS field_category_1_p
+FROM
+	[[[table_name_1]]] AS a // pms table
+	INNER JOIN
+	[[[table_name_2]]] AS b // frameindex table
+	ON a.LogMile = b.LogMile AND a.[Section] = b.[Section]
+WHERE
+	a.[Section] = '[[short_section]]'
+ORDER BY
+	b.StartFrameNumber

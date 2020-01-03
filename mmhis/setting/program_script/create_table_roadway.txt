@@ -1,0 +1,36 @@
+create table [[[table_name]]] (
+	ID	Integer,
+	DateUpdated	varchar(10),
+	District	varchar(3),
+	County	varchar(3),
+	[Section]	varchar(5),
+	BeginningLogMile	float,
+	EndingLogMile	float,
+	Length	float,
+	RuralUrbanCode	varchar(3),
+	FunctionalClassification	varchar(4),
+	NHSSystemClassification	varchar(4),
+	SurfaceTypeCode	varchar(4),
+	SurfaceWidth	real,
+	LaneWidth	real,
+	MedianWidth	real,
+	RightShoulderSurfaceType	varchar(4),
+	LeftShoulderSurfaceType	varchar(4),
+	RightShoulderWidth	real,
+	LeftShoulderWidth	real,
+	JobNumber	varchar(12),
+	YearBuilt	varchar(8),
+	AverageDailyTraffic	Integer,
+	YearADTCollected	varchar(8),
+	NumberOfLanes	smallint
+);
+
+create index [LogMile] on [[[table_name]]] ([BeginningLogMile], [EndingLogMile], [Section]);
+
+create index [MMHISIndex] on [[[table_name]]] ([Section], [BeginningLogMile], [EndingLogMile]);
+
+create index [PrimaryKey] on [[[table_name]]] ([Section], [BeginningLogMile], [EndingLogMile]) with primary;
+
+create index [RuralUrbanCode] on [[[table_name]]] ([RuralUrbanCode]);
+
+create index [SurfaceTypeCode] on [[[table_name]]] ([SurfaceTypeCode]);

@@ -1,0 +1,11 @@
+CREATE TABLE "mmhis_data_field_format" (
+	"uuid"	TEXT NOT NULL,
+	"field_specifier"	TEXT NOT NULL,
+	"caption_suggestion"	TEXT NOT NULL,
+	"value_format_english"	TEXT,
+	"unit_english"	TEXT,
+	"conversion_factor_english"	REAL,
+	"value_format_metric"	TEXT,
+	"unit_metric"	TEXT,
+	"conversion_factor_metric"	REAL
+);

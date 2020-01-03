@@ -1,0 +1,3 @@
+SELECT min([StartFrameNumber]) start_frame_number, max([EndFrameNumber]) end_frame_number
+FROM [[[table]]]
+WHERE [Section] = '[[section_number]]';

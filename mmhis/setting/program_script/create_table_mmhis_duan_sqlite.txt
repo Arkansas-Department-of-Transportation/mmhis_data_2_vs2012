@@ -1,0 +1,26 @@
+CREATE TABLE "mmhis_duan" (
+	"lu"	TEXT NOT NULL,
+	"logmeter_0"	REAL NOT NULL,
+	"logmeter_1"	REAL,
+	"latitude"	REAL,
+	"longitude"	REAL,
+	"ld"	TEXT NOT NULL
+);
+
+CREATE INDEX "index_duan_0" ON "mmhis_duan" (
+	"lu",
+	"logmeter_0",
+	"logmeter_1"
+);
+
+CREATE INDEX "index_duan_1" ON "mmhis_duan" (
+	"latitude",
+	"longitude"
+);
+
+
+CREATE INDEX "index_duan_2" ON "mmhis_duan" (
+    "lu",
+	"latitude",
+	"longitude"
+);

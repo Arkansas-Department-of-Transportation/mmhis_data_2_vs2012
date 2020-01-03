@@ -1,0 +1,58 @@
+// non-ARNOLD
+
+//SELECT [ID]
+//      ,CONVERT(VARCHAR(10), GETDATE(), 101) DateUpdated
+//      ,CASE WHEN SUBSTRING([District],1,1) = '0' THEN SUBSTRING([District], 2, 1) ELSE [District] END [District]
+//      ,[County]
+//      ,CASE WHEN SUBSTRING([Sectn],1,1) = '0' THEN '' ELSE SUBSTRING([Sectn],1,1) END + CASE WHEN SUBSTRING([Sectn],3,1)='0' THEN SUBSTRING([Sectn],2,1) ELSE SUBSTRING([Sectn],2,2) END [Section]
+//      ,[Logmile] [BeginningLogMile]
+//      ,[EndLogmile] [EndingLogMile]
+//      ,[RoadLength] [Length]
+//      ,[RuralUrbanArea] [RuralUrbanCode]
+//      ,[FuncClass] [FunctionalClassification]
+//      ,[NHS] [NHSSystemClassification]
+//      ,[SurfaceType] [SurfaceTypeCode]
+//      ,[SurfaceWidth]
+//      ,[LaneWidth]
+//      ,CAST([MedianWidth] AS int) [MedianWidth]
+//      ,'S' + [RightShldSur] [RightShoulderSurfaceType]
+//      ,'S' + [LeftShldSur] [LeftShoulderSurfaceType]
+//      ,[RightSHldWidth] [RightShoulderWidth]
+//      ,[LeftSHldWidth] [LeftShoulderWidth]
+//      ,'' [JobNumber]
+//      ,[YearBuilt]
+//      ,[AvgDailyTraffic] [AverageDailyTraffic]
+//      ,[YearADT] [YearADTCollected]
+//      ,CAST([NumberLanes] AS int) [NumberOfLanes]
+//  FROM [[[database]]].[[[schema]]].[[[table_name]]]
+//  where County='[[two_digit_county]]' and Route='[[five_digit_route]]' and Sectn='[[three_digit_section]]';
+
+// ARNOLD
+
+SELECT [OBJECTID] [ID]
+      ,CONVERT(VARCHAR(10), GETDATE(), 101) DateUpdated
+      ,AH_District [District]
+      ,AH_County [County]
+      ,AH_Section [Section]
+      ,AH_BLM [BeginningLogMile]
+      ,AH_ELM [EndingLogMile]
+      ,AH_Length [Length]
+      ,[RuralUrbanArea] [RuralUrbanCode]
+      ,[FunctionalClass] [FunctionalClassification]
+      ,[NHS] [NHSSystemClassification]
+      ,[SurfaceType] [SurfaceTypeCode]
+      ,[SurfaceWidth]
+      ,[LaneWidth]
+      ,[MedianWidth]
+      ,'S' + LTRIM(STR([RightShoulderSurface], 10)) [RightShoulderSurfaceType]
+      ,'S' + LTRIM(STR([LeftShoulderSurface], 10)) [LeftShoulderSurfaceType]
+      ,[RightShoulderWidth] [RightShoulderWidth]
+      ,[LeftShoulderWidth]
+      ,'' [JobNumber]
+      ,[YearBuilt]
+      ,[ADT] [AverageDailyTraffic]
+      ,[ADT_Year] [YearADTCollected]
+      ,[Total_Lanes] [NumberOfLanes]
+  FROM [[[database]]].[[[schema]]].[[[table_name]]]
+  WHERE AH_RoadID = '[[road_id]]'
+  ORDER BY AH_BLM;

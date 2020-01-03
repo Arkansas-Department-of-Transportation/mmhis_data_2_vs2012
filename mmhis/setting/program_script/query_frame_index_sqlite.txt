@@ -1,0 +1,46 @@
+// ARNOLD
+
+
+SELECT ROUND([Logmeter], 4) [Logmile]
+      ,[Section]
+      ,[VideoFileName]
+      ,[StartFrameNumber]
+      ,[EndFrameNumber]
+      ,[TurningMovementFlag]
+FROM (
+SELECT [Logmile] * 1609.344 [Logmeter]
+      ,'[[the_section]]' [Section]
+      ,'[[the_video_filename]]' [VideoFileName]
+      ,(
+            SELECT count(*)
+            FROM [[table_spec]] b
+            WHERE a.[Logmile] > b.[Logmile] AND [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+      ) + 1 [StartFrameNumber]
+      ,(
+            SELECT count(*)
+            FROM [[table_spec]] b
+            WHERE a.[Logmile] > b.[Logmile] AND [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+      ) + 2 [EndFrameNumber]
+      ,0 [TurningMovementFlag]
+  FROM [[table_spec]] a
+  WHERE [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+) c
+ORDER BY Logmile
+
+//SELECT [Logmeter] [Logmile]
+//      ,[Section]
+//      ,[VideoFileName]
+//      ,[StartFrameNumber]
+//      ,[EndFrameNumber]
+//      ,[TurningMovementFlag]
+//FROM (
+//SELECT [Logmile] * 1609.344 [Logmeter]
+//      ,'[[the_section]]' [Section]
+//      ,'[[the_video_filename]]' [VideoFileName]
+//      ,ROW_NUMBER() OVER (ORDER BY Logmile ASC) [StartFrameNumber]
+//      ,ROW_NUMBER() OVER (ORDER BY Logmile ASC) + 1 [EndFrameNumber]
+//      ,0 [TurningMovementFlag]
+//  FROM [[table_spec]] a
+//  WHERE [RoadID] IS NOT NULL AND [RoadID] = '[[road_id]]' AND [UniqueRun] = '[[unique_run]]'
+//) c
+//ORDER BY Logmile

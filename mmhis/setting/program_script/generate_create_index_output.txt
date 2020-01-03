@@ -1,0 +1,358 @@
+//_________________________________________________________________________________________________________________
+//accident table:
+create table [test_accident] (
+	DateUpdated	char	(10),
+	CrashNumber	float,
+	LogMile	float,
+	[Section]	char	(3),
+	NumberOfFatalities	smallint,
+	NumberOfInjuries	smallint,
+	CrashInConstructionZone	Integer,
+	IntersectionType	Integer,
+	NHSCode	char	(1),
+	RoadSystem	smallint
+);
+
+select
+	DateUpdated,
+	CrashNumber,
+	LogMile,
+	[Section],
+	NumberOfFatalities,
+	NumberOfInjuries,
+	CrashInConstructionZone,
+	IntersectionType,
+	NHSCode,
+	RoadSystem
+from [test_accident]
+where 1=0;
+
+create index [LogMile] on [test_accident] (LogMile);
+
+create index [NHSCode] on [test_accident] (NHSCode);
+
+create index [NumberOfFatalities] on [test_accident] (NumberOfFatalities);
+
+create index [NumberOfInjuries] on [test_accident] (NumberOfInjuries);
+
+create index [PrimaryKey] on [test_accident] ([Section], [LogMile]) with primary;
+
+create index [Section] on [test_accident] ([Section]);
+
+//_________________________________________________________________________________________________________________
+//bridge table:
+create table [test_bridge] (
+	ID	Integer,
+	LogMile	float,
+	BeginningLogMile	float,
+	EndingLogMile	float,
+	[Section]	char(3),
+	DateUpdated	char(10),
+	StructureNumber	char(6),
+	FacilityOnStructure	char(25),
+	HighestMinimumVerticalClearanceFeet	char(2),
+	HighestMinimumVerticalClearanceInches	char(2),
+	YearBuilt	char(5),
+	MainSpanType	char(3),
+	ApproachSpanType	char(3),
+	NumberOfApproachSpans	char(4),
+	MaximumSpanLength	char(4),
+	StructureLength	char(6),
+	CurbToCurbWidth	char(4),
+	OutToOutDeckWidth	char(4),
+	DeckCondition	char(1),
+	SubstructureCondition	char(1),
+	OperatingRating	char(3),
+	BridgePosting	char(50),
+	RoutineInspectionDate	char(8),
+	DesignatedInspectionFrequency	char(2),
+	YearReconstructed	char(5),
+	DeckType	char(1),
+	SurfaceType	char(3),
+	SufficiencyRating	char(5),
+	ReplacementFundingCode	char(2)
+);
+
+select
+	ID,
+	LogMile,
+	BeginningLogMile,
+	EndingLogMile,
+	[Section],
+	DateUpdated,
+	StructureNumber,
+	FacilityOnStructure,
+	HighestMinimumVerticalClearanceFeet,
+	HighestMinimumVerticalClearanceInches,
+	YearBuilt,
+	MainSpanType,
+	ApproachSpanType,
+	NumberOfApproachSpans,
+	MaximumSpanLength,
+	StructureLength,
+	CurbToCurbWidth,
+	OutToOutDeckWidth,
+	DeckCondition,
+	SubstructureCondition,
+	OperatingRating,
+	BridgePosting,
+	RoutineInspectionDate,
+	DesignatedInspectionFrequency,
+	YearReconstructed,
+	DeckType,
+	SurfaceType,
+	SufficiencyRating,
+	ReplacementFundingCode
+from [test_bridge]
+where 1=0;
+
+create index [MMHISIndex] on [test_bridge] ([Section], [BeginningLogMile], [EndingLogMile]);
+
+create index [NumberOfApproachSpans] on [test_bridge] ([NumberOfApproachSpans]);
+
+create index [PrimaryKey] on [test_bridge] ([Section], [BeginningLogMile], [EndingLogMile]) with primary;
+
+create index [ReplacementFundingCode] on [test_bridge] ([ReplacementFundingCode]);
+
+//_________________________________________________________________________________________________________________
+//format table:
+create table [test_format] (
+	FieldName	char(50),
+	Caption	char(100),
+	Type	char(1),
+	Unitless	yesno,
+	MetricsUnitName	char(20),
+	MetricsConverter	real,
+	ImperialUnitName	char(20),
+	ImperialConverter	real,
+	Format	char(10),
+	GroupName	char(30),
+	DefaultDisplayOrder	smallint,
+	SourceTable	char(10)
+);
+
+select
+	FieldName,
+	Caption,
+	Type,
+	Unitless,
+	MetricsUnitName,
+	MetricsConverter,
+	ImperialUnitName,
+	ImperialConverter,
+	Format,
+	GroupName,
+	DefaultDisplayOrder,
+	SourceTable
+from [test_format]
+where 1=0;
+
+create index [DefaultDisplayOrder] on [test_format] ([DefaultDisplayOrder]);
+
+create index [FieldName] on [test_format] ([FieldName]);
+
+//_________________________________________________________________________________________________________________
+//frameindex table:
+create table [test_frameindex] (
+	LogMile	float,
+	[Section]	char(3),
+	VideoFileName	char(25),
+	StartFrameNumber	Integer,
+	EndFrameNumber	Integer,
+	TurningMovementFlag	byte
+);
+
+select
+	LogMile,
+	[Section],
+	VideoFileName,
+	StartFrameNumber,
+	EndFrameNumber,
+	TurningMovementFlag
+from [test_frameindex]
+where 1=0
+
+create index [EndFrameNumber] on [test_frameindex] ([EndFrameNumber]);
+
+create index [MMHIS1] on [test_frameindex] ([Section], [LogMile]);
+
+create index [MMHIS2] on [test_frameindex] ([StartFrameNumber], [EndFrameNumber]);
+
+create index [PrimaryKey] on [test_frameindex] ([Section], [LogMile], [StartFrameNumber]) with primary;
+
+create index [StartFrameNumber] on [test_frameindex] ([StartFrameNumber]);
+
+create index [VideoFileName] on [test_frameindex] ([VideoFileName]);
+
+create index [VideoFileNameandFrameNumber] on [test_frameindex] ([VideoFileName], [StartFrameNumber], [EndFrameNumber]);
+
+//_________________________________________________________________________________________________________________
+//jobrecord table:
+create table [test_jobrecord] (
+	DateUpdated	char(10),
+	BeginningLogMile	float,
+	[Section]	char(3),
+	JobNumber	char(10),
+	ProjectLength	float,
+	MinuteOrderNumber	char(10),
+	MinuteOrderDate	char(10),
+	LetDate	char(10),
+	CompletionDate	char(10),
+	TotalCost	char(15),
+	Location	char(50),
+	TypeWork	char(30),
+	HIPTypeWork	char(30),
+	IncludedInHIP91	char(1)
+);
+
+select
+	DateUpdated,
+	BeginningLogMile,
+	[Section],
+	JobNumber,
+	ProjectLength,
+	MinuteOrderNumber,
+	MinuteOrderDate,
+	LetDate	char(10),
+	CompletionDate,
+	TotalCost,
+	Location,
+	TypeWork,
+	HIPTypeWork,
+	IncludedInHIP91
+from [test_jobrecord]
+where 1=0;
+
+create index [PrimaryKey] on [test_jobrecord] ([Section], [BeginningLogMile]) with primary;
+
+//_________________________________________________________________________________________________________________
+//pms table:
+create table [test_pms] (
+	LogMile	float,
+	[Section]	char(3),
+	IRILeftWheelPath	real,
+	IRIRightWheelPath	real,
+	RuttingLeftWheelPath	real,
+	RuttingRightWheelPath	real,
+	Grade	real,
+	FaultCount	smallint,
+	AverageFault	real,
+	MaximumFault	smallint,
+	Latitude	float,
+	Longitude	float,
+	Speed	real
+);
+
+select
+	LogMile,
+	[Section],
+	IRILeftWheelPath,
+	IRIRightWheelPath,
+	RuttingLeftWheelPath,
+	RuttingRightWheelPath,
+	Grade,
+	FaultCount,
+	AverageFault,
+	MaximumFault,
+	Latitude,
+	Longitude,
+	Speed
+from [test_pms]
+where 1=0;
+
+create index [LogMile] on [test_pms] ([LogMile]);
+
+create index [MMHISIndex] on [test_pms] ([Section], [LogMile]);
+
+create index [PrimaryKey] on [test_pms] ([Section], [LogMile]) with primary;
+
+//_________________________________________________________________________________________________________________
+//roadway table:
+create table [test_roadway] (
+	ID	Integer,
+	DateUpdated	char(10),
+	District	char(2),
+	County	char(2),
+	[Section]	char(3),
+	BeginningLogMile	float,
+	EndingLogMile	float,
+	Length	float,
+	RuralUrbanCode	char(1),
+	FunctionalClassification	char(2),
+	NHSSystemClassification	char(2),
+	SurfaceTypeCode	char(2),
+	SurfaceWidth	real,
+	LaneWidth	real,
+	MedianWidth	real,
+	RightShoulderSurfaceType	char(2),
+	LeftShoulderSurfaceType	char(2),
+	RightShoulderWidth	real,
+	LeftShoulderWidth	real,
+	JobNumber	char(10),
+	YearBuilt	char(4),
+	AverageDailyTraffic	Integer,
+	YearADTCollected	char(4),
+	NumberOfLanes	smallint
+);
+
+select
+	ID,
+	DateUpdated,
+	District,
+	County,
+	[Section],
+	BeginningLogMile,
+	EndingLogMile,
+	Length,
+	RuralUrbanCode,
+	FunctionalClassification,
+	NHSSystemClassification,
+	SurfaceTypeCode,
+	SurfaceWidth,
+	LaneWidth,
+	MedianWidth,
+	RightShoulderSurfaceType,
+	LeftShoulderSurfaceType,
+	RightShoulderWidth,
+	LeftShoulderWidth,
+	JobNumber,
+	YearBuilt,
+	AverageDailyTraffic,
+	YearADTCollected,
+	NumberOfLanes
+from [test_roadway]
+where 1=0;
+
+create index [LogMile] on [test_roadway] ([BeginningLogMile], [EndingLogMile], [Section]);
+
+create index [MMHISIndex] on [test_roadway] ([Section], [BeginningLogMile], [EndingLogMile]);
+
+create index [PrimaryKey] on [test_roadway] ([Section], [BeginningLogMile], [EndingLogMile]) with primary;
+
+create index [RuralUrbanCode] on [test_roadway] ([RuralUrbanCode]);
+
+create index [SurfaceTypeCode] on [test_roadway] ([SurfaceTypeCode]);
+
+//_________________________________________________________________________________________________________________
+//turn table:
+create table [test_turn] (
+	LogMile	float,
+	[Section]	char(3),
+	ThroughRowID	Integer,
+	ThroughLogMile	float,
+	Throughsection	char(3)
+);
+
+select
+	LogMile,
+	[Section],
+	ThroughRowID,
+	ThroughLogMile,
+	Throughsection
+from [test_turn]
+where 1=0;
+
+create index [PrimaryKey] on [test_turn] ([Section], [LogMile]) with primary;
+
+create index [ThroughRowId] on [test_turn] ([ThroughRowID]);
+

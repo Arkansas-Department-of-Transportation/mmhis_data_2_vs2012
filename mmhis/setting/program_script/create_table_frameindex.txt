@@ -1,0 +1,22 @@
+create table [[[table_name]]] (
+	LogMile	float,
+	[Section]	varchar(3),
+	VideoFileName	varchar(255),
+	StartFrameNumber	Integer,
+	EndFrameNumber	Integer,
+	TurningMovementFlag	byte
+);
+
+create index [EndFrameNumber] on [[[table_name]]] ([EndFrameNumber]);
+
+create index [MMHIS1] on [[[table_name]]] ([Section], [LogMile]);
+
+create index [MMHIS2] on [[[table_name]]] ([StartFrameNumber], [EndFrameNumber]);
+
+create index [PrimaryKey] on [[[table_name]]] ([Section], [LogMile], [StartFrameNumber]) with primary;
+
+create index [StartFrameNumber] on [[[table_name]]] ([StartFrameNumber]);
+
+create index [VideoFileName] on [[[table_name]]] ([VideoFileName]);
+
+create index [VideoFileNameandFrameNumber] on [[[table_name]]] ([VideoFileName], [StartFrameNumber], [EndFrameNumber]);

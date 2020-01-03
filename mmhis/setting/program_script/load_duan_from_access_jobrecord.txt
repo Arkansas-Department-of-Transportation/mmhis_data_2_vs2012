@@ -1,0 +1,20 @@
+SELECT
+	 a.[BeginningLogMile] * 1609.344 AS no_category_logmeter_0
+	,(a.[BeginningLogMile] + a.[ProjectLength]) * 1609.344 AS no_category_logmeter_1
+	,a.[DateUpdated] AS field_category_0_DateUpdated
+	,a.[BeginningLogMile] AS field_category_0_BeginningLogMile // in miles
+	,a.[JobNumber] AS field_category_0_JobNumber
+	,a.[ProjectLength] AS field_category_0_ProjectLength // in miles
+	,a.[MinuteOrderNumber] AS field_category_0_MinuteOrderNumber
+	,a.[MinuteOrderDate] AS field_category_0_MinuteOrderDate
+	,a.[LetDate] AS field_category_0_LetDate
+	,a.[CompletionDate] AS field_category_0_CompletionDate
+	,a.[TotalCost] AS field_category_0_TotalCost
+	,a.[Location] AS field_category_0_Location
+	,a.[TypeWork] AS field_category_0_TypeWork
+	,a.[HIPTypeWork] AS field_category_0_HIPTypeWork
+	,a.[IncludedInHIP91] AS field_category_0_IncludedInHIP91
+FROM
+	[[[table_name_1]]] AS a
+WHERE a.[Section] = '[[short_section]]'
+ORDER BY a.BeginningLogMile

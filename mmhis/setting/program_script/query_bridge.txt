@@ -1,0 +1,125 @@
+// non-ARNOLD. Latitude and Longitude needed to convert to ARNOLD, hence Latitude / Longitude are
+// included in the fields. MMHIS bridge table structure is modified for this purpose.
+// for each bridge record with ON_UNDER not equal to 1, there is a record in the same table
+// with the same BRIDGE_ID that has a 1 in the ON_UNDER field. This query pulls information
+// from that corresponding record
+// Since the ON_UNDER for the crossing bridge can be either 'A' or 'B', we use group by on
+// the query to pick just one of them.
+//
+// for the bridges on the road, two directions have different structure numbers with prefix 'A'
+// or 'B' (and even 'C' or 'D' -- for bridges on ramps) followed by a common number.
+// There is no way to tell which one is the correct
+// bridge, because the 'A' and 'B' here don't indicate log or antilog. To solve this
+// problem, the Latitude and Longitude have to be used again. The bridge cloest to the
+// road will be selected.
+//
+
+SELECT
+    MIN(LogMile) LogMile,
+    MIN(BeginningLogMile) BeginningLogMile,
+    MIN(EndingLogMile) EndingLogMile,
+    MIN([Section]) [Section],
+    MIN(DateUpdated) DateUpdated,
+    MIN(StructureNumber) StructureNumber,
+    MIN(FacilityOnStructure) FacilityOnStructure,
+    MIN(HighestMinimumVerticalClearanceFeet) HighestMinimumVerticalClearanceFeet,
+    MIN(HighestMinimumVerticalClearanceInches) HighestMinimumVerticalClearanceInches,
+    MIN(YearBuilt) YearBuilt,
+    MIN(MainSpanType) MainSpanType,
+    MIN(ApproachSpanType) ApproachSpanType,
+    MIN(NumberOfApproachSpans) NumberOfApproachSpans,
+    MIN(MaximumSpanLength) MaximumSpanLength,
+    MIN(StructureLength) StructureLength,
+    MIN(CurbToCurbWidth) CurbToCurbWidth,
+    MIN(OutToOutDeckWidth) OutToOutDeckWidth,
+    MIN(DeckCondition) DeckCondition,
+    MIN(SubstructureCondition) SubstructureCondition,
+    MIN(OperatingRating) OperatingRating,
+    MIN(BridgePosting) BridgePosting,
+    MIN(RoutineInspectionDate) RoutineInspectionDate,
+    MIN(DesignatedInspectionFrequency) DesignatedInspectionFrequency,
+    MIN(YearReconstructed) YearReconstructed,
+    MIN(DeckType) DeckType,
+    MIN(SurfaceType) SurfaceType,
+    MIN(SufficiencyRating) SufficiencyRating,
+    MIN(ReplacementFundingCode) ReplacementFundingCode,
+    MIN(LogMile) NonArnoldLogMile,  
+    MIN(Latitude) Latitude,
+    MIN(Longitude) Longitude
+FROM
+(
+SELECT
+      a.[LMPOST] LogMile
+      ,a.[LMPOST] BeginningLogMile
+      ,ROUND(a.[LMPOST] + (CASE WHEN a.[ON_UNDER] = '1' THEN a.[LENGTH] * 0.000621371 ELSE 0.03 END), 2) EndingLogMile
+      ,CASE WHEN SUBSTRING(a.[SECTN],1,1) = '0' THEN '' ELSE SUBSTRING(a.[SECTN],1,1) END + CASE WHEN SUBSTRING(a.[SECTN],3,1)='0' THEN SUBSTRING(a.[SECTN],2,1) ELSE SUBSTRING(a.[SECTN],2,2) END [Section]
+      ,CONVERT(VARCHAR(10), GETDATE(), 101) DateUpdated
+      ,a.[BRIDGE_ID] StructureNumber
+      ,a.[FACILITY] [FacilityOnStructure]
+      ,CASE WHEN a.[VCLRUNDER] = 0 OR a.[VCLRUNDER] = -1 THEN 0 WHEN a.[VCLRUNDER] * 3.28084 > 99 THEN 99 ELSE CAST(FLOOR(a.[VCLRUNDER] * 3.28084) AS INT) END [HighestMinimumVerticalClearanceFeet]
+      ,CASE WHEN a.[VCLRUNDER] = 0 OR a.[VCLRUNDER] = -1 THEN 0 WHEN a.[VCLRUNDER] * 3.28084 > 99 THEN 99 ELSE CAST(FLOOR((a.[VCLRUNDER] * 3.28084 - CAST(FLOOR(a.[VCLRUNDER] * 3.28084) AS INT)) * 12) AS INT) END [HighestMinimumVerticalClearanceInches]
+      ,a.[YEARBUILT] [YearBuilt]
+      ,a.[MATERIALMAIN] + a.[DESIGNMAIN] [MainSpanType]
+      ,a.[MATERIALAPPR] + a.[DESIGNAPPR] [ApproachSpanType]
+      ,a.[APPSPANS] [NumberOfApproachSpans]
+      ,ROUND(a.[MAXSPAN] * 3.28084, 0) [MaximumSpanLength]
+      ,ROUND(a.[LENGTH] * 3.28084, 0) [StructureLength]
+      ,b.[CurbToCurbWidth]
+      ,b.[OutToOutDeckWidth]
+      ,b.[DeckCondition]
+      ,b.[SubstructureCondition]
+      ,b.[OperatingRating]
+      ,b.[BridgePosting]
+      ,a.[INSPDATE] [RoutineInspectionDate]
+      ,b.[DesignatedInspectionFrequency]
+      ,a.[YEARRECON] [YearReconstructed]
+      ,b.[DeckType]
+      ,b.[SurfaceType]
+      ,b.[SufficiencyRating]
+      ,b.[ReplacementFundingCode]
+      ,a.[T_LAT] [Latitude]
+      ,a.[T_LONG] [Longitude]
+//      ,a.[ON_UNDER] [OnUnder]
+//      ,a.[DIRSUFFIX] [DirectionOfTravel]
+//      ,a.[FEATINT] [FacilityIntersected]
+FROM [[[database]]].[[[schema]]].[[[table_name]]] a LEFT JOIN (
+SELECT
+      [LMPOST] LogMile
+      ,[LMPOST] BeginningLogMile
+      ,ROUND([LMPOST] + (CASE WHEN [ON_UNDER] = '1' THEN [LENGTH] * 0.000621371 ELSE 0.03 END), 2) EndingLogMile
+      ,CASE WHEN SUBSTRING([SECTN],1,1) = '0' THEN '' ELSE SUBSTRING([SECTN],1,1) END + CASE WHEN SUBSTRING([SECTN],3,1)='0' THEN SUBSTRING([SECTN],2,1) ELSE SUBSTRING([SECTN],2,2) END [Section]
+      ,CONVERT(VARCHAR(10), GETDATE(), 101) DateUpdated
+      ,[BRIDGE_ID] StructureNumber
+      ,[FACILITY] [FacilityOnStructure]
+      ,CASE WHEN [VCLRUNDER] = 0 OR [VCLRUNDER] = -1 THEN 0 WHEN [VCLRUNDER] * 3.28084 > 99 THEN 99 ELSE CAST(FLOOR([VCLRUNDER] * 3.28084) AS INT) END [HighestMinimumVerticalClearanceFeet]
+      ,CASE WHEN [VCLRUNDER] = 0 OR [VCLRUNDER] = -1 THEN 0 WHEN [VCLRUNDER] * 3.28084 > 99 THEN 99 ELSE CAST(FLOOR(([VCLRUNDER] * 3.28084 - CAST(FLOOR([VCLRUNDER] * 3.28084) AS INT)) * 12) AS INT) END [HighestMinimumVerticalClearanceInches]
+      ,[YEARBUILT] [YearBuilt]
+      ,[MATERIALMAIN] + [DESIGNMAIN] [MainSpanType]
+      ,[MATERIALAPPR] + [DESIGNAPPR] [ApproachSpanType]
+      ,[APPSPANS] [NumberOfApproachSpans]
+      ,ROUND([MAXSPAN] * 3.28084, 0) [MaximumSpanLength]
+      ,ROUND([LENGTH] * 3.28084, 0) [StructureLength]
+      ,ROUND(CAST([ROADWIDTH] AS FLOAT) * 3.28084, 0) [CurbToCurbWidth]
+      ,ROUND(CAST([DECKWIDTH] AS FLOAT) * 3.28084, 0) [OutToOutDeckWidth]
+      ,[DKRATING] [DeckCondition]
+      ,[SUBRATING] [SubstructureCondition]
+      ,ROUND(CAST([ORLOAD] AS FLOAT) / 0.90718472, 0) [OperatingRating]
+      ,'Code 4:' + (CASE WHEN [AHTDCode4] IS NULL OR [AHTDCode4] = '' OR [AHTDCode4] = '-1' THEN 'n/a' ELSE [AHTDCode4] END) + '; Code 5:' + (CASE WHEN [AHTDCode5] IS NULL OR [AHTDCode5] = '' OR [AHTDCode5] = '-1' THEN 'n/a' ELSE [AHTDCode5] END) + '; Code 9:' + (CASE WHEN [AHTDCode9] IS NULL OR [AHTDCode9] = '' OR [AHTDCode9] = '-1' THEN 'n/a' ELSE [AHTDCode9] END) [BridgePosting]
+      ,[INSPDATE] [RoutineInspectionDate]
+      ,[BRINSPFREQ] [DesignatedInspectionFrequency]
+      ,[YEARRECON] [YearReconstructed]
+      ,[DKSTRUCTYP] [DeckType]
+      ,[DKSURFTYPE] + [DKMEMBTYPE] + [DKPROTECT] [SurfaceType]
+      ,[SUFF_RATE] [SufficiencyRating]
+      ,CASE WHEN [NBI_RATING] = '0' THEN 'NQ' WHEN [NBI_RATING] = '1' THEN 'SD' ELSE 'FO' END [ReplacementFundingCode]
+//      ,[ON_UNDER] [OnUnder]
+//      ,[DIRSUFFIX] [DirectionOfTravel]
+//      ,[FEATINT] [FacilityIntersected]
+FROM [[[database]]].[[[schema]]].[[[table_name]]]
+Where [ON_UNDER] = '1') b
+  On a.[BRIDGE_ID] = b.StructureNumber
+  Where [ROUTENUM]='[[five_digit_route]]' and [SECTN] = '[[three_digit_section]]'
+//  Where [Road_Id2]='[[road_id_with_no_direction]]'
+) c
+  Group by StructureNumber
+  Order by 2

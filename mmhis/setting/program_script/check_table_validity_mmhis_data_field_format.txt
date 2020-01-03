@@ -1,0 +1,6 @@
+SELECT
+ "uuid"
+,"field_specifier"
+,"caption"
+,"unit"
+FROM mmhis_data_field

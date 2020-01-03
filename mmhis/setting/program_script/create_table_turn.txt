@@ -1,0 +1,11 @@
+create table [[[table_name]]] (
+	LogMile	float,
+	[Section]	varchar(3),
+	ThroughRowID	Integer,
+	ThroughLogMile	float,
+	ThroughSection	varchar(3)
+);
+
+create index [PrimaryKey] on [[[table_name]]] ([Section], [LogMile]) with primary;
+
+create index [ThroughRowId] on [[[table_name]]] ([ThroughRowID]);

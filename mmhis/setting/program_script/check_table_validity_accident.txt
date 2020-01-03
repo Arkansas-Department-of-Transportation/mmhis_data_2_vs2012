@@ -1,0 +1,15 @@
+select
+	DateUpdated,
+	CrashNumber,
+	LogMile,
+	[Section],
+	NumberOfFatalities,
+	NumberOfInjuries,
+	CrashInConstructionZone,
+	IntersectionType,
+	NHSCode,
+	RoadSystem,
+	Latitude,
+	Longitude
+from [[[table_name]]]
+where [Section] = '[[section_number]]';

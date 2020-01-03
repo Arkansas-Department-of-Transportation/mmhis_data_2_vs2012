@@ -1,0 +1,92 @@
+SELECT
+	 d.*
+	,c.DateUpdated AS [[pre_3]]DateUpdated 
+	,c.CrashNumber AS [[pre_3]]CrashNumber 
+	,c.LogMile AS [[pre_3]]LogMile // already in miles
+	,c.NumberOfFatalities AS [[pre_3]]NumberOfFatalities 
+	,c.NumberOfInjuries AS [[pre_3]]NumberOfInjuries 
+	,c.CrashInConstructionZone AS [[pre_3]]CrashInConstructionZone 
+	,c.IntersectionType AS [[pre_3]]IntersectionType 
+	,c.NHSCode AS [[pre_3]]NHSCode 
+	,c.RoadSystem AS [[pre_3]]RoadSystem 
+FROM (
+SELECT
+	a.LogMile AS logmile // always in meters
+	,a.LogMile / 1609.344 AS [[pre_1]]LogMile // in miles
+	,a.IRILeftWheelPath AS [[pre_1]]IRILeftWheelPath
+	,a.IRIRightWheelPath AS [[pre_1]]IRIRightWheelPath
+	,a.RuttingLeftWheelPath AS [[pre_1]]RuttingLeftWheelPath
+	,a.RuttingRightWheelPath AS [[pre_1]]RuttingRightWheelPath
+	,a.Grade AS [[pre_1]]Grade
+	,a.FaultCount AS [[pre_1]]FaultCount
+	,a.AverageFault AS [[pre_1]]AverageFault
+	,a.MaximumFault AS [[pre_1]]MaximumFault
+	,a.Latitude AS [[pre_1]]Latitude
+	,a.Longitude AS [[pre_1]]Longitude
+	,a.Speed AS [[pre_1]]Speed
+	,b.StartFrameNumber AS [[pre_2]]fl
+	,b.StartFrameNumber AS [[pre_2]]f
+	,b.StartFrameNumber AS [[pre_2]]fr
+	,b.StartFrameNumber AS [[pre_2]]rl
+	,b.StartFrameNumber AS [[pre_2]]rr
+	,b.StartFrameNumber AS [[pre_2]]p
+FROM
+	[[[table_name_1]]] AS a // pms table
+	INNER JOIN
+	[[[table_name_2]]] AS b // frameindex table
+	ON a.LogMile = b.LogMile AND a.[Section] = b.[Section]
+WHERE
+	a.[Section] = '[[short_section]]'
+) AS d
+LEFT JOIN
+(SELECT *
+FROM [[[table_name_3]]] as c // accident table
+WHERE [Section] = '[[three_character_section]]'
+) AS e // this to to solve the three-character section and short section matching problem
+ON d.LogMile - 5 < e.LogMile * 1609.344 AND d.LogMile + 5 > e.LogMile * 1609.344
+
+// old version
+//SELECT
+//	 d.*
+//	,c.StartFrameNumber AS [[pre_3]]fl
+//	,c.StartFrameNumber AS [[pre_3]]f
+//	,c.StartFrameNumber AS [[pre_3]]fr
+//	,c.StartFrameNumber AS [[pre_3]]rl
+//	,c.StartFrameNumber AS [[pre_3]]rr
+//	,c.StartFrameNumber AS [[pre_3]]p
+//FROM (
+//SELECT
+//	a.LogMile AS logmile // always in meters
+//	,a.LogMile / 1609.344 AS [[pre_1]]LogMile // in miles
+//	,a.IRILeftWheelPath AS [[pre_1]]IRILeftWheelPath
+//	,a.IRIRightWheelPath AS [[pre_1]]IRIRightWheelPath
+//	,a.RuttingLeftWheelPath AS [[pre_1]]RuttingLeftWheelPath
+//	,a.RuttingRightWheelPath AS [[pre_1]]RuttingRightWheelPath
+//	,a.Grade AS [[pre_1]]Grade
+//	,a.FaultCount AS [[pre_1]]FaultCount
+//	,a.AverageFault AS [[pre_1]]AverageFault
+//	,a.MaximumFault AS [[pre_1]]MaximumFault
+//	,a.Latitude AS [[pre_1]]Latitude
+//	,a.Longitude AS [[pre_1]]Longitude
+//	,a.Speed AS [[pre_1]]Speed
+//	,b.DateUpdated AS [[pre_2]]DateUpdated 
+//	,b.CrashNumber AS [[pre_2]]CrashNumber 
+//	,b.LogMile AS [[pre_2]]LogMile // already in miles
+//	,b.NumberOfFatalities AS [[pre_2]]NumberOfFatalities 
+//	,b.NumberOfInjuries AS [[pre_2]]NumberOfInjuries 
+//	,b.CrashInConstructionZone AS [[pre_2]]CrashInConstructionZone 
+//	,b.IntersectionType AS [[pre_2]]IntersectionType 
+//	,b.NHSCode AS [[pre_2]]NHSCode 
+//	,b.RoadSystem AS [[pre_2]]RoadSystem 
+//FROM
+//	[[[table_name_1]]] AS a
+//	LEFT JOIN
+//	[[[table_name_2]]] AS b
+//	ON a.LogMile - 5 < b.LogMile * 1609.344 AND a.LogMile + 5 > b.LogMile * 1609.344 AND a.[Section] = b.[Section]
+//WHERE
+//	a.[Section] = '[[short_section]]'
+//) AS d
+//INNER JOIN
+//[[[table_name_3]]] AS c
+//ON ABS(d.LogMile - c.LogMile) < 0.1 // both are in meters
+//WHERE c.[Section] = '[[short_section]]'

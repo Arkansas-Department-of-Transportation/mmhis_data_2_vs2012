@@ -1,0 +1,16 @@
+CREATE TABLE "mmhis_fen" (
+	"lu"	TEXT NOT NULL,
+	"field_category"	TEXT NOT NULL,
+	"field_name"	TEXT NOT NULL,
+	"field_value"	TEXT NOT NULL
+)
+
+CREATE INDEX "index_fen_0" ON "mmhis_fen" (
+	"lu",
+	"field_category",
+	"field_name"
+);
+
+CREATE INDEX "index_fen_1" ON "mmhis_fen" (
+	"field_value"
+);
